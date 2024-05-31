@@ -33,7 +33,7 @@ class BundleAdjustmentSetup : public colmap::BundleAdjustmentConfig {
 
   // Overwrite methods which trigger glog
   void SetConstantCamPose(const colmap::image_t image_id);
-  void SetConstantTvec(const colmap::image_t image_id,
+  void SetConstantCamPositions(const colmap::image_t image_id,
                        const std::vector<int>& idxs);
   void AddVariablePoint(const colmap::point3D_t point3D_id);
   void AddConstantPoint(const colmap::point3D_t point3D_id);

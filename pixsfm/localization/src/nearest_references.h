@@ -2,7 +2,7 @@
 
 #include <ceres/ceres.h>
 #include <colmap/scene/reconstruction.h>
-#include <colmap/optim/bundle_adjustment.h>
+#include <colmap/estimators/bundle_adjustment.h>
 #include <colmap/util/types.h>
 
 #include <vector>

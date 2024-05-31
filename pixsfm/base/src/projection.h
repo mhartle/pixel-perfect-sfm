@@ -4,7 +4,7 @@
 #include <colmap/sensor/models.h>
 #include <colmap/scene/image.h>
 #include <colmap/scene/projection.h>
-#include <colmap/util/math.h>
+#include <colmap/math/math.h>
 
 #include <ceres/ceres.h>
 #include <ceres/rotation.h>

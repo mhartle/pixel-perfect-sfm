@@ -218,7 +218,7 @@ Initialization Wrappers: (resolving camera model templates)
 
 template <int CHANNELS, int N_NODES, int OUT_CHANNELS, typename dtype>
 ceres::CostFunction* CreateFeatureReferenceCostFunctor(
-    int camera_model_id, const FeaturePatch<dtype>& patch,
+    CameraModelId camera_model_id, const FeaturePatch<dtype>& patch,
     const double* reference_descriptor, const double* node_offsets3D,
     InterpolationConfig& interpolation_config) {
   switch (camera_model_id) {
@@ -236,7 +236,7 @@ ceres::CostFunction* CreateFeatureReferenceCostFunctor(
 
 template <int CHANNELS, int N_NODES, int OUT_CHANNELS, typename dtype>
 ceres::CostFunction* CreateFeatureReferenceConstantPoseCostFunctor(
-    int camera_model_id, double* qvec, double* tvec,
+    CameraModelId camera_model_id, double* qvec, double* tvec,
     const FeaturePatch<dtype>& patch, const double* reference_descriptor,
     const double* node_offsets3D, InterpolationConfig& interpolation_config) {
   switch (camera_model_id) {
@@ -255,7 +255,7 @@ ceres::CostFunction* CreateFeatureReferenceConstantPoseCostFunctor(
 // PyBind interfaces
 template <typename dtype>
 ceres::CostFunction* CreateFeatureReferenceCostFunctor(
-    int camera_model_id, const FeaturePatch<dtype>& patch,
+    CameraModelID camera_model_id, const FeaturePatch<dtype>& patch,
     Eigen::Ref<DescriptorMatrixXd> reference_descriptor,
     InterpolationConfig& interpolation_config) {
   int channels = patch.Channels();
@@ -287,7 +287,7 @@ ceres::CostFunction* CreateFeatureReferenceCostFunctor(
 
 template <typename dtype>
 ceres::CostFunction* CreateFeatureReferenceConstantPoseCostFunctor(
-    int camera_model_id, Eigen::Ref<Eigen::Vector4d> qvec,
+    CameraModelId camera_model_id, Eigen::Ref<Eigen::Vector4d> qvec,
     Eigen::Ref<Eigen::Vector3d> tvec, const FeaturePatch<dtype>& patch,
     Eigen::Ref<DescriptorMatrixXd> reference_descriptor,
     InterpolationConfig& interpolation_config) {

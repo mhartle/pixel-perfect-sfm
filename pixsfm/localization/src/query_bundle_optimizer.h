@@ -47,7 +47,7 @@ class QueryBundleOptimizer {
 
   template <int CHANNELS, int N_NODES, typename dtype>
   inline ceres::ResidualBlockId AddFeatureReferenceResidual(
-      ceres::Problem* problem, int camera_model_id, double* camera_params_data,
+      ceres::Problem* problem, CameraModelId camera_model_id, double* camera_params_data,
       double* qvec_data, double* tvec_data, double* xyz_data,
       const double* reference_descriptor_data,
       const double* node_offsets3D,  // CAN BE NULL if N_NODES==1
@@ -55,7 +55,7 @@ class QueryBundleOptimizer {
 
   template <typename dtype>
   inline ceres::ResidualBlockId AddFeatureReferenceResidual(
-      ceres::Problem* problem, int camera_model_id, double* camera_params_data,
+      ceres::Problem* problem, CameraModelId camera_model_id, double* camera_params_data,
       double* qvec_data, double* tvec_data, double* xyz_data,
       const double* reference_descriptor_data,
       const double* node_offsets3D,  // CAN BE NULL if N_NODES==1
@@ -151,7 +151,7 @@ void QueryBundleOptimizer::ParameterizeQuery(ceres::Problem* problem,
 
 template <typename dtype>
 ceres::ResidualBlockId QueryBundleOptimizer::AddFeatureReferenceResidual(
-    ceres::Problem* problem, int camera_model_id, double* camera_params_data,
+    ceres::Problem* problem, CameraModelId camera_model_id, double* camera_params_data,
     double* qvec_data, double* tvec_data, double* xyz_data,
     const double* reference_descriptor_data,
     const double* node_offsets3D,  // CAN BE NULL if N_NODES==1
@@ -171,7 +171,7 @@ ceres::ResidualBlockId QueryBundleOptimizer::AddFeatureReferenceResidual(
 
 template <int CHANNELS, int N_NODES, typename dtype>
 ceres::ResidualBlockId QueryBundleOptimizer::AddFeatureReferenceResidual(
-    ceres::Problem* problem, int camera_model_id, double* camera_params_data,
+    ceres::Problem* problem, CameraModelId camera_model_id, double* camera_params_data,
     double* qvec_data, double* tvec_data, double* xyz_data,
     const double* reference_descriptor_data,
     const double* node_offsets3D,  // CAN BE NULL if N_NODES==1

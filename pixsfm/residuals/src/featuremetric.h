@@ -259,7 +259,7 @@ Initialization Wrappers: (resolving camera model templates)
 
 template <int CHANNELS, int N_NODES, typename dtype>
 ceres::CostFunction* CreateFeatureMetricCostFunctor(
-    int camera_model_id,               // Src
+    CameraModelId camera_model_id,               // Src
     const FeaturePatch<dtype>& patch,  // Src
     int src_camera_model_id, const FeaturePatch<dtype>& src_patch,
     InterpolationConfig& interpolation_config) {
@@ -282,7 +282,7 @@ ceres::CostFunction* CreateFeatureMetricCostFunctor(
 
 template <int CHANNELS, int N_NODES, typename dtype>
 ceres::CostFunction* CreateFeatureMetricRegularizerCostFunctor(
-    int camera_model_id, int src_camera_model_id,
+    CameraModelId camera_model_id, int src_camera_model_id,
     const FeaturePatch<dtype>& patch, const double* reference_descriptor,
     InterpolationConfig& interpolation_config) {
   // Temporary
@@ -304,7 +304,7 @@ ceres::CostFunction* CreateFeatureMetricRegularizerCostFunctor(
 
 template <int CHANNELS, int N_NODES, typename dtype>
 ceres::CostFunction* CreateFeatureMetricSharedIntrinsicsCostFunctor(
-    int camera_model_id, const FeaturePatch<dtype>& patch,
+    CameraModelId camera_model_id, const FeaturePatch<dtype>& patch,
     const FeaturePatch<dtype>& src_patch,
     InterpolationConfig& interpolation_config) {
   switch (camera_model_id) {
@@ -321,7 +321,7 @@ ceres::CostFunction* CreateFeatureMetricSharedIntrinsicsCostFunctor(
 
 template <int CHANNELS, int N_NODES, typename dtype>
 ceres::CostFunction* CreateFeatureMetricSharedIntrinsicsRegularizerCostFunctor(
-    int camera_model_id, const FeaturePatch<dtype>& patch,
+    CameraModelId camera_model_id, const FeaturePatch<dtype>& patch,
     const double* reference_descriptor,
     InterpolationConfig& interpolation_config) {
   switch (camera_model_id) {

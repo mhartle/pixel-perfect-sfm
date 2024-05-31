@@ -33,7 +33,7 @@ ceres::CostFunction* CreateGeometricConstantPoseCostFunctor(
 #define CAMERA_MODEL_CASE(CameraModel)                       \
   case colmap::CameraModel::model_id:                        \
     return colmap::ReprojErrorConstantPoseCostFunction< \
-        colmap::CameraModel>::Create(colmap::Rigid3d(qvec, tvec), point2D);   \
+        colmap::CameraModel>::Create(colmap::Rigid3d(Eigen::Quaterniond(qvec[0], qvec[1], qvec[2], qvec[3]), tvec), point2D);   \
     break;
     CAMERA_MODEL_SWITCH_CASES
 #undef CAMERA_MODEL_CASE

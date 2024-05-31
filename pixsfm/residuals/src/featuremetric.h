@@ -349,13 +349,13 @@ ceres::CostFunction* CreateFeatureMetricCostFunctor(
 
 #define REGISTER_METHOD(CHANNELS, N_NODES)                            \
   if (channels == CHANNELS && n_nodes == N_NODES) {                   \
-    if (camera.Params() == src_camera.Params()) {                     \
+    if (camera.params == src_camera.params) {                         \
       return CreateFeatureMetricSharedIntrinsicsCostFunctor<CHANNELS, \
                                                             N_NODES>( \
-          camera.ModelId(), patch, src_patch, interpolation_config);  \
+          camera.model_id, patch, src_patch, interpolation_config);   \
     } else {                                                          \
       return CreateFeatureMetricCostFunctor<CHANNELS, N_NODES>(       \
-          camera.ModelId(), patch, src_camera.ModelId(), src_patch,   \
+          camera.model_id, patch, src_camera.model_id, src_patch,     \
           interpolation_config);                                      \
     }                                                                 \
   }

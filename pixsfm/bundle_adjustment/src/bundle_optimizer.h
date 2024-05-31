@@ -8,7 +8,7 @@
 #include <colmap/scene/projection.h>
 #include <colmap/scene/reconstruction.h>
 #include <colmap/estimators/bundle_adjustment.h>
-#include <colmap/util/alignment.h>
+#include <colmap/estimators/alignment.h>
 #include <colmap/util/logging.h>
 #include <colmap/util/misc.h>
 #include <colmap/util/threading.h>

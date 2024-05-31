@@ -135,7 +135,7 @@ int PatchWarpBundleOptimizer::AddResiduals(
     if (src_point2D_idx == point2D_idx && options_.regularize_source) {
       ceres::CostFunction* cost_function =
           CreateFeatureReferenceCostFunctor<CHANNELS, N_NODES, -1>(
-              camera.ModelId(),
+              camera.model_id,
               feature_view.GetFeaturePatch(image_id, src_point2D_idx),
               references.at(point3D_id).DescriptorData(),
               references.at(point3D_id).NodeOffsets3DData(),
@@ -156,7 +156,7 @@ int PatchWarpBundleOptimizer::AddResiduals(
       // Shared intrinsics
       ceres::CostFunction* cost_function =
           CreateFeatureMetricSharedIntrinsicsCostFunctor<CHANNELS, N_NODES>(
-              camera.ModelId(),
+              camera.model_id,
               feature_view.GetFeaturePatch(image_id, point2D_idx),
               feature_view.GetFeaturePatch(src_image_id, src_point2D_idx),
               interpolation_config_);
@@ -166,9 +166,9 @@ int PatchWarpBundleOptimizer::AddResiduals(
     } else {
       ceres::CostFunction* cost_function =
           CreateFeatureMetricCostFunctor<CHANNELS, N_NODES>(
-              camera.ModelId(),
+              camera.model_id,
               feature_view.GetFeaturePatch(image_id, point2D_idx),
-              src_camera.ModelId(),
+              src_camera.model_id,
               feature_view.GetFeaturePatch(src_image_id, src_point2D_idx),
               interpolation_config_);
       block_id = problem_->AddResidualBlock(

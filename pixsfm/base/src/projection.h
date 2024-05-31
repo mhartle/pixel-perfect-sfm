@@ -81,7 +81,7 @@ inline void WorldToPixel(const colmap::Camera& camera,
   switch (camera.model_id) {
 #define CAMERA_MODEL_CASE(CameraModel)                                  \
   case colmap::CameraModel::model_id:                                   \
-    WorldToPixel<colmap::CameraModel>(camera.ParamsData(), qvec.data(), \
+    WorldToPixel<colmap::CameraModel>(camera.params.data(), qvec.data(), \
                                       tvec.data(), xyz.data(), xy);     \
     break;
     CAMERA_MODEL_SWITCH_CASES

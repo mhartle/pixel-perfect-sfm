@@ -42,7 +42,7 @@ int GeometricBundleOptimizer::AddResiduals<>(
     colmap::Reconstruction* reconstruction,
     ceres::LossFunction* loss_function) {
   const bool constant_pose =
-      (!options_.refine_extrinsics || setup_.HasConstantPose(image_id) ||
+      (!options_.refine_extrinsics || setup_.HasConstantCamPose(image_id) ||
        !setup_.HasImage(image_id));
 
   colmap::Image& image = reconstruction->Image(image_id);

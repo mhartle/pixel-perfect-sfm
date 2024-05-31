@@ -195,8 +195,8 @@ BOOST_AUTO_TEST_CASE(TestTwoView) {
   colmap::BundleAdjustmentConfig config;
   config.AddImage(0);
   config.AddImage(1);
-  config.SetConstantPose(0);
-  config.SetConstantTvec(1, {0});
+  config.SetConstantCamPose(0);
+  config.SetConstantCamPositions(1, {0});
 
   colmap::BundleAdjustmentOptions options;
   TestBA(reconstruction, options, config);
@@ -211,8 +211,8 @@ BOOST_AUTO_TEST_CASE(TestTwoViewConstantCamera) {
   colmap::BundleAdjustmentConfig config;
   config.AddImage(0);
   config.AddImage(1);
-  config.SetConstantPose(0);
-  config.SetConstantPose(1);
+  config.SetConstantCamPose(0);
+  config.SetConstantCamPose(1);
   config.SetConstantCamera(0);
 
   colmap::BundleAdjustmentOptions options;
@@ -231,8 +231,8 @@ BOOST_AUTO_TEST_CASE(TestPartiallyContainedTracks) {
   colmap::BundleAdjustmentConfig config;
   config.AddImage(0);
   config.AddImage(1);
-  config.SetConstantPose(0);
-  config.SetConstantPose(1);
+  config.SetConstantCamPose(0);
+  config.SetConstantCamPose(1);
 
   colmap::BundleAdjustmentOptions options;
   TestBA(reconstruction, options, config);
@@ -254,8 +254,8 @@ BOOST_AUTO_TEST_CASE(TestPartiallyContainedTracksForceToOptimizePoint) {
   colmap::BundleAdjustmentConfig config;
   config.AddImage(0);
   config.AddImage(1);
-  config.SetConstantPose(0);
-  config.SetConstantPose(1);
+  config.SetConstantCamPose(0);
+  config.SetConstantCamPose(1);
   config.AddVariablePoint(add_variable_point3D_id);
   config.AddConstantPoint(add_constant_point3D_id);
 
@@ -275,8 +275,8 @@ BOOST_AUTO_TEST_CASE(TestConstantPoints) {
   colmap::BundleAdjustmentConfig config;
   config.AddImage(0);
   config.AddImage(1);
-  config.SetConstantPose(0);
-  config.SetConstantPose(1);
+  config.SetConstantCamPose(0);
+  config.SetConstantCamPose(1);
   config.AddConstantPoint(constant_point3D_id1);
   config.AddConstantPoint(constant_point3D_id2);
 
@@ -294,8 +294,8 @@ BOOST_AUTO_TEST_CASE(TestVariableImage) {
   config.AddImage(0);
   config.AddImage(1);
   config.AddImage(2);
-  config.SetConstantPose(0);
-  config.SetConstantTvec(1, {0});
+  config.SetConstantCamPose(0);
+  config.SetConstantCamPositions(1, {0});
 
   colmap::BundleAdjustmentOptions options;
   TestBA(reconstruction, options, config);
@@ -310,8 +310,8 @@ BOOST_AUTO_TEST_CASE(TestConstantFocalLength) {
   colmap::BundleAdjustmentConfig config;
   config.AddImage(0);
   config.AddImage(1);
-  config.SetConstantPose(0);
-  config.SetConstantTvec(1, {0});
+  config.SetConstantCamPose(0);
+  config.SetConstantCamPositions(1, {0});
 
   colmap::BundleAdjustmentOptions options;
   options.refine_focal_length = false;
@@ -327,8 +327,8 @@ BOOST_AUTO_TEST_CASE(TestVariablePrincipalPoint) {
   colmap::BundleAdjustmentConfig config;
   config.AddImage(0);
   config.AddImage(1);
-  config.SetConstantPose(0);
-  config.SetConstantTvec(1, {0});
+  config.SetConstantCamPose(0);
+  config.SetConstantCamPositions(1, {0});
 
   colmap::BundleAdjustmentOptions options;
   options.refine_principal_point = true;
@@ -344,8 +344,8 @@ BOOST_AUTO_TEST_CASE(TestConstantExtraParam) {
   colmap::BundleAdjustmentConfig config;
   config.AddImage(0);
   config.AddImage(1);
-  config.SetConstantPose(0);
-  config.SetConstantTvec(1, {0});
+  config.SetConstantCamPose(0);
+  config.SetConstantCamPositions(1, {0});
 
   colmap::BundleAdjustmentOptions options;
   options.refine_extra_params = false;

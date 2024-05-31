@@ -376,13 +376,13 @@ void BundleOptimizer<Derived>::ParameterizeImages(
       double* tvec_data = image.Tvec().data();
 
       const bool constant_pose = !options_.refine_extrinsics ||
-                                 setup_.HasConstantPose(image_id) ||
+                                 setup_.HasConstantCamPose(image_id) ||
                                  !setup_.HasImage(image_id);
 
       // Set pose parameterization.
       if (!constant_pose) {
         colmap::SetQuaternionManifold(problem_.get(), qvec_data);
-        if (setup_.HasConstantTvec(image_id)) {
+        if (setup_.HasConstantCamPositions(image_id)) {
           const std::vector<int>& constant_tvec_idxs =
               setup_.ConstantTvec(image_id);
           colmap::SetSubsetManifold(3, constant_tvec_idxs, problem_.get(),

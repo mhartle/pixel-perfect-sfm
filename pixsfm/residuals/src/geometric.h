@@ -18,7 +18,7 @@ ceres::CostFunction* CreateGeometricCostFunctor(
   switch (camera_model_id) {
 #define CAMERA_MODEL_CASE(CameraModel)                                        \
   case colmap::CameraModel::model_id:                                         \
-    return colmap::BundleAdjustmentCostFunction<colmap::CameraModel>::Create( \
+    return colmap::ReprojErrorCostFunction<colmap::CameraModel>::Create( \
         point2D);                                                             \
     break;
     CAMERA_MODEL_SWITCH_CASES

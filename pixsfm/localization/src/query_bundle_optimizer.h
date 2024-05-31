@@ -122,29 +122,29 @@ void QueryBundleOptimizer::ParameterizeQuery(ceres::Problem* problem,
                                !options_.refine_principal_point &&
                                !options_.refine_extra_params;
   if (constant_camera) {
-    problem->SetParameterBlockConstant(camera.ParamsData());
+    problem->SetParameterBlockConstant(camera.params.data());
   } else {
     std::vector<int> const_camera_params;
     if (!options_.refine_focal_length) {
-      const std::vector<size_t>& params_idxs = camera.FocalLengthIdxs();
+      const std::vector<size_t>& params_idxs = camera.focal_length_idxs;
       const_camera_params.insert(const_camera_params.end(), params_idxs.begin(),
                                  params_idxs.end());
     }
     if (!options_.refine_principal_point) {
-      const std::vector<size_t>& params_idxs = camera.PrincipalPointIdxs();
+      const std::vector<size_t>& params_idxs = camera.principal_point_idxs;
       const_camera_params.insert(const_camera_params.end(), params_idxs.begin(),
                                  params_idxs.end());
     }
     if (!options_.refine_extra_params) {
-      const std::vector<size_t>& params_idxs = camera.ExtraParamsIdxs();
+      const std::vector<size_t>& params_idxs = camera.extra_params_idxs;
       const_camera_params.insert(const_camera_params.end(), params_idxs.begin(),
                                  params_idxs.end());
     }
 
     if (const_camera_params.size() > 0) {
-      colmap::SetSubsetManifold(static_cast<int>(camera.NumParams()),
+      colmap::SetSubsetManifold(static_cast<int>(camera.num_params),
                                 const_camera_params, problem,
-                                camera.ParamsData());
+                                camera.params.data());
     }
   }
 }

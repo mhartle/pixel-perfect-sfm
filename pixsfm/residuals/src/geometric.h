@@ -1,8 +1,8 @@
 #pragma once
 
 #include <ceres/ceres.h>
-#include <colmap/base/cost_functions.h>
-#include <colmap/base/projection.h>
+#include <colmap/estimators/cost_functions.h>
+#include <colmap/scene/projection.h>
 #include <colmap/util/types.h>
 
 #include "base/src/projection.h"

@@ -13,7 +13,7 @@ namespace py = pybind11;
 #include <Eigen/Dense>
 
 #include <ceres/ceres.h>
-#include <colmap/base/projection.h>
+#include <colmap/scene/projection.h>
 #include <colmap/util/timer.h>
 #include <colmap/util/types.h>
 

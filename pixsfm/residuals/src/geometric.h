@@ -17,7 +17,7 @@ ceres::CostFunction* CreateGeometricCostFunctor(
     int camera_model_id, const Eigen::Vector2d& point2D) {
   switch (camera_model_id) {
 #define CAMERA_MODEL_CASE(CameraModel)                                        \
-  case colmap::CameraModel::kModelId:                                         \
+  case colmap::CameraModel::model_id:                                         \
     return colmap::BundleAdjustmentCostFunction<colmap::CameraModel>::Create( \
         point2D);                                                             \
     break;
@@ -31,7 +31,7 @@ ceres::CostFunction* CreateGeometricConstantPoseCostFunctor(
     const Eigen::Vector3d& tvec, const Eigen::Vector2d& point2D) {
   switch (camera_model_id) {
 #define CAMERA_MODEL_CASE(CameraModel)                       \
-  case colmap::CameraModel::kModelId:                        \
+  case colmap::CameraModel::model_id:                        \
     return colmap::BundleAdjustmentConstantPoseCostFunction< \
         colmap::CameraModel>::Create(qvec, tvec, point2D);   \
     break;

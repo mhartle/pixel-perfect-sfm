@@ -10,7 +10,7 @@ namespace py = pybind11;
 #include <ceres/ceres.h>
 #include <colmap/scene/reconstruction.h>
 #include <colmap/estimators/cost_functions.h>
-#include <colmap/optim/bundle_adjustment.h>
+#include <colmap/estimators/bundle_adjustment.h>
 #include <colmap/util/logging.h>
 #include <colmap/util/misc.h>
 #include <colmap/util/threading.h>

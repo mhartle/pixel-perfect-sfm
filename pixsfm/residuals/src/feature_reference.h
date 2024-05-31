@@ -223,7 +223,7 @@ ceres::CostFunction* CreateFeatureReferenceCostFunctor(
     InterpolationConfig& interpolation_config) {
   switch (camera_model_id) {
 #define CAMERA_MODEL_CASE(CameraModel)                               \
-  case colmap::CameraModel::kModelId:                                \
+  case colmap::CameraModel::model_id:                                \
     return FeatureReferenceCostFunctor<                              \
         colmap::CameraModel, dtype, CHANNELS, N_NODES,               \
         OUT_CHANNELS>::Create(patch, interpolation_config,           \
@@ -241,7 +241,7 @@ ceres::CostFunction* CreateFeatureReferenceConstantPoseCostFunctor(
     const double* node_offsets3D, InterpolationConfig& interpolation_config) {
   switch (camera_model_id) {
 #define CAMERA_MODEL_CASE(CameraModel)                                 \
-  case colmap::CameraModel::kModelId:                                  \
+  case colmap::CameraModel::model_id:                                  \
     return FeatureReferenceConstantPoseCostFunctor<                    \
         colmap::CameraModel, dtype, CHANNELS, N_NODES,                 \
         OUT_CHANNELS>::Create(patch, interpolation_config, qvec, tvec, \

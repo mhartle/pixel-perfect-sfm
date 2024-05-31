@@ -36,7 +36,7 @@
 #include <colmap/sensor/models.h>
 #include <colmap/scene/correspondence_graph.h>
 #include <colmap/scene/projection.h>
-#include <colmap/optim/bundle_adjustment.h>
+#include <colmap/estimators/bundle_adjustment.h>
 #include <colmap/util/random.h>
 
 #include "bundle_adjustment/src/bundle_adjustment_options.h"

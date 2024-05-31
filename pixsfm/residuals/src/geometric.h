@@ -32,7 +32,7 @@ ceres::CostFunction* CreateGeometricConstantPoseCostFunctor(
   switch (camera_model_id) {
 #define CAMERA_MODEL_CASE(CameraModel)                       \
   case colmap::CameraModel::model_id:                        \
-    return colmap::BundleAdjustmentConstantPoseCostFunction< \
+    return colmap::ReprojErrorConstantPoseCostFunction< \
         colmap::CameraModel>::Create(qvec, tvec, point2D);   \
     break;
     CAMERA_MODEL_SWITCH_CASES

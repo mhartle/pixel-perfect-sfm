@@ -282,7 +282,7 @@ ceres::CostFunction* CreateFeatureMetricCostFunctor(
 
 template <int CHANNELS, int N_NODES, typename dtype>
 ceres::CostFunction* CreateFeatureMetricRegularizerCostFunctor(
-    colmap::CameraModelId camera_model_id, int src_camera_model_id,
+    colmap::CameraModelId camera_model_id, colmap::CameraModelId src_camera_model_id,
     const FeaturePatch<dtype>& patch, const double* reference_descriptor,
     InterpolationConfig& interpolation_config) {
   // Temporary

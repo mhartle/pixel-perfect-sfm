@@ -100,7 +100,7 @@ struct FeatureMetricCostFunctor {
       InterpolationConfig& interpolation_config) {
     return (new ceres::AutoDiffCostFunction<
             FeatureMetricCostFunctor, N_NODES * CHANNELS, 4, 3, 4, 3, 3,
-            CameraModel::kNumParams, SourceCameraModel::kNumParams>(
+            CameraModel::num_params, SourceCameraModel::num_params>(
         new FeatureMetricCostFunctor(patch, &src_patch, interpolation_config)));
   }
 
@@ -109,7 +109,7 @@ struct FeatureMetricCostFunctor {
                                      const double* reference_descriptor) {
     return (new ceres::AutoDiffCostFunction<
             FeatureMetricCostFunctor, N_NODES * CHANNELS, 4, 3, 4, 3, 3,
-            CameraModel::kNumParams, SourceCameraModel::kNumParams>(
+            CameraModel::num_params, SourceCameraModel::num_params>(
         new FeatureMetricCostFunctor(target_patch, NULL, interpolation_config,
                                      reference_descriptor)));
   }
@@ -213,7 +213,7 @@ struct FeatureMetricSharedIntrinsicsCostFunctor
       InterpolationConfig& interpolation_config) {
     return (new ceres::AutoDiffCostFunction<
             FeatureMetricSharedIntrinsicsCostFunctor, N_NODES * CHANNELS, 4, 3,
-            4, 3, 3, CameraModel::kNumParams>(
+            4, 3, 3, CameraModel::num_params>(
         new FeatureMetricSharedIntrinsicsCostFunctor(patch, &src_patch,
                                                      interpolation_config)));
   }
@@ -223,7 +223,7 @@ struct FeatureMetricSharedIntrinsicsCostFunctor
                                      const double* reference_descriptor) {
     return (new ceres::AutoDiffCostFunction<
             FeatureMetricSharedIntrinsicsCostFunctor, N_NODES * CHANNELS, 4, 3,
-            4, 3, 3, CameraModel::kNumParams>(
+            4, 3, 3, CameraModel::num_params>(
         new FeatureMetricSharedIntrinsicsCostFunctor(
             target_patch, NULL, interpolation_config, reference_descriptor)));
   }

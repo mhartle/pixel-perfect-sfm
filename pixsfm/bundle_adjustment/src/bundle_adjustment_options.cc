@@ -17,7 +17,7 @@ void BundleAdjustmentSetup::SetConstantCamPositions(const colmap::image_t image_
   THROW_CHECK(HasImage(image_id));
   THROW_CHECK(!HasConstantCamPose(image_id));
   THROW_CHECK(!colmap::VectorContainsDuplicateValues(idxs));
-  colmap::BundleAdjustmentConfig::SetConstantTvec(image_id, idxs);
+  colmap::BundleAdjustmentConfig::SetConstantCamPositions(image_id, idxs);
 }
 void BundleAdjustmentSetup::AddVariablePoint(
     const colmap::point3D_t point3D_id) {

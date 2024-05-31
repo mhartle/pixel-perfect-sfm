@@ -261,7 +261,7 @@ template <int CHANNELS, int N_NODES, typename dtype>
 ceres::CostFunction* CreateFeatureMetricCostFunctor(
     colmap::CameraModelId camera_model_id,               // Src
     const FeaturePatch<dtype>& patch,  // Src
-    int src_camera_model_id, const FeaturePatch<dtype>& src_patch,
+    colmap::CameraModelId src_camera_model_id, const FeaturePatch<dtype>& src_patch,
     InterpolationConfig& interpolation_config) {
   // Temporary
   THROW_CHECK_EQ(camera_model_id, src_camera_model_id);

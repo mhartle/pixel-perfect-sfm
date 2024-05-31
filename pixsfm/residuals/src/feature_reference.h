@@ -255,7 +255,7 @@ ceres::CostFunction* CreateFeatureReferenceConstantPoseCostFunctor(
 // PyBind interfaces
 template <typename dtype>
 ceres::CostFunction* CreateFeatureReferenceCostFunctor(
-    CameraModelID camera_model_id, const FeaturePatch<dtype>& patch,
+    colmap::CameraModelId camera_model_id, const FeaturePatch<dtype>& patch,
     Eigen::Ref<DescriptorMatrixXd> reference_descriptor,
     InterpolationConfig& interpolation_config) {
   int channels = patch.Channels();

@@ -252,7 +252,7 @@ void BundleOptimizer<Derived>::AddImageToProblem(
   colmap::Image& image = reconstruction->Image(image_id);
   colmap::Camera& camera = reconstruction->Camera(image.CameraId());
 
-  image.cam_from_world.rotation.normalize();
+  image.CamFromWorld().rotation.normalize();
 
   // Add residuals to bundle adjustment problem.
   for (colmap::point2D_t point2D_idx = 0; point2D_idx < image.NumPoints2D();
@@ -372,8 +372,8 @@ void BundleOptimizer<Derived>::ParameterizeImages(
       colmap::Image& image = reconstruction->Image(image_id);
       colmap::Camera& camera = reconstruction->Camera(image.CameraId());
 
-      double* qvec_data = image.cam_from_world.rotation.data();
-      double* tvec_data = image.cam_from_world.translation.data();
+      double* qvec_data = image.CamFromWorld().rotation.data();
+      double* tvec_data = image.CamFromWorld().translation.data();
 
       const bool constant_pose = !options_.refine_extrinsics ||
                                  setup_.HasConstantCamPose(image_id) ||

@@ -343,15 +343,15 @@ void BundleOptimizer<Derived>::ParameterizePoints(
         options_.min_track_length > 0
             ? std::min(options_.min_track_length,
                        static_cast<int>(point3D.track.Length()))
-            : point3D.Track().Length();
+            : point3D.track.Length();
     if (min_track_length > elem.second.size()) {
-      problem_->SetParameterBlockConstant(point3D.XYZ().data());
+      problem_->SetParameterBlockConstant(point3D.xyz.data());
       ++cnt;
     } else if (options_.solver_options.use_inner_iterations) {
       // Ruhe-Weldin 2 approximation to the VarPro Algorithm:
       // Use EPI (RCS is solved outside, i.e. only camera parameters)
       options_.solver_options.inner_iteration_ordering->AddElementToGroup(
-          point3D.XYZ().data(), 0);
+          point3D.xyz.data(), 0);
     }
   }
   STDLOG(DEBUG) << "Num Constant points3D: " << cnt << std::endl;
@@ -359,7 +359,7 @@ void BundleOptimizer<Derived>::ParameterizePoints(
   // been added to problem.
   for (const colmap::point3D_t point3D_id : setup_.ConstantPoints()) {
     colmap::Point3D& point3D = reconstruction->Point3D(point3D_id);
-    problem_->SetParameterBlockConstant(point3D.XYZ().data());
+    problem_->SetParameterBlockConstant(point3D.xyz.data());
   }
 }
 
@@ -372,7 +372,7 @@ void BundleOptimizer<Derived>::ParameterizeImages(
       colmap::Image& image = reconstruction->Image(image_id);
       colmap::Camera& camera = reconstruction->Camera(image.CameraId());
 
-      double* qvec_data = image.CamFromWorld().rotation.data();
+      double* qvec_data = image.CamFromWorld().rotation.coeffs().data();
       double* tvec_data = image.CamFromWorld().translation.data();
 
       const bool constant_pose = !options_.refine_extrinsics ||
@@ -411,7 +411,7 @@ void BundleOptimizer<Derived>::ParameterizeCameras(
     colmap::Camera& camera = reconstruction->Camera(camera_id);
 
     if (constant_camera || setup_.HasConstantCamPose(camera_id)) {
-      problem_->SetParameterBlockConstant(camera.ParamsData());
+      problem_->SetParameterBlockConstant(camera.params.data());
       continue;
     } else {
       std::vector<int> const_camera_params;
@@ -433,9 +433,9 @@ void BundleOptimizer<Derived>::ParameterizeCameras(
       }
 
       if (const_camera_params.size() > 0) {
-        colmap::SetSubsetManifold(static_cast<int>(camera.NumParams()),
+        colmap::SetSubsetManifold(static_cast<int>(colmap::CameraModelNumParams(camera.model_id)),
                                   const_camera_params, problem_.get(),
-                                  camera.ParamsData());
+                                  camera.params.data());
       }
     }
   }

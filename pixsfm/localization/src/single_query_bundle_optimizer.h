@@ -116,7 +116,7 @@ bool SingleQueryBundleOptimizer::RunQuery(
     }
 
     QueryBO::AddFeatureReferenceResidual<CHANNELS, N_NODES>(
-        &problem, camera.model_id, camera.ParamsData(), qvec.data(),
+        &problem, camera.model_id, camera.params.data(), qvec.data(),
         tvec.data(), points3D[idx].data(), references[idx].data(), NULL,
         fmap.GetFeaturePatch(patch_idx), loss_function);
     problem.SetParameterBlockConstant(points3D[idx].data());

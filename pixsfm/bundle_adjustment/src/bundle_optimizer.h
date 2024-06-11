@@ -252,7 +252,7 @@ void BundleOptimizer<Derived>::AddImageToProblem(
   colmap::Image& image = reconstruction->Image(image_id);
   colmap::Camera& camera = reconstruction->Camera(image.CameraId());
 
-  image.NormalizeQvec();
+  image.cam_from_world.rotation.normalize();
 
   // Add residuals to bundle adjustment problem.
   for (colmap::point2D_t point2D_idx = 0; point2D_idx < image.NumPoints2D();
@@ -263,9 +263,9 @@ void BundleOptimizer<Derived>::AddImageToProblem(
       continue;
     }
 
-    colmap::Point3D& point3D = reconstruction->Point3D(point2D.Point3DId());
+    colmap::Point3D& point3D = reconstruction->Point3D(point2D.point3D_id);
 
-    if (static_cast<int>(point3D.Track().Length()) <
+    if (static_cast<int>(point3D.track.Length()) <
         options_.min_track_length) {
       continue;
     }
@@ -286,11 +286,11 @@ void BundleOptimizer<Derived>::AddPointToProblem(
   colmap::Point3D& point3D = reconstruction->Point3D(point3D_id);
 
   // Is 3D point already fully contained in the problem? If so we skip.
-  if (point3D_reg_track_idx_[point3D_id].size() == point3D.Track().Length()) {
+  if (point3D_reg_track_idx_[point3D_id].size() == point3D.track.Length()) {
     return;
   }
 
-  for (const auto& track_el : point3D.Track().Elements()) {
+  for (const auto& track_el : point3D.track.Elements()) {
     // Skip observations that were already added in `FillImages`.
     if (setup_.HasImage(track_el.image_id)) {
       continue;
@@ -304,7 +304,7 @@ void BundleOptimizer<Derived>::AddPointToProblem(
     // part of `constant_image_ids_`, `constant_image_ids_`,
     // `constant_x_image_ids_`.
     if (camera_num_residuals_[image.CameraId()] == 0) {
-      setup_.SetConstantCamera(image.CameraId());
+      setup_.SetConstantCamPose(image.CameraId());
     }
     int num_blocks = static_cast<Derived*>(this)->template AddResiduals<Ns...>(
         track_el.image_id, track_el.point2D_idx, reconstruction, loss_function,
@@ -318,8 +318,8 @@ bool BundleOptimizer<Derived>::RegisterPoint3DObservation(
     colmap::point2D_t point2D_idx, colmap::Reconstruction* reconstruction) {
   colmap::Point3D& point3D = reconstruction->Point3D(point3D_id);
 
-  for (int track_idx = 0; track_idx < point3D.Track().Length(); ++track_idx) {
-    auto& track_el = point3D.Track().Element(track_idx);
+  for (int track_idx = 0; track_idx < point3D.track.Length(); ++track_idx) {
+    auto& track_el = point3D.track.Element(track_idx);
     if (track_el.image_id == image_id && track_el.point2D_idx == point2D_idx) {
       point3D_reg_track_idx_[point3D_id].insert(track_idx);
       return true;
@@ -342,7 +342,7 @@ void BundleOptimizer<Derived>::ParameterizePoints(
     int min_track_length =
         options_.min_track_length > 0
             ? std::min(options_.min_track_length,
-                       static_cast<int>(point3D.Track().Length()))
+                       static_cast<int>(point3D.track.Length()))
             : point3D.Track().Length();
     if (min_track_length > elem.second.size()) {
       problem_->SetParameterBlockConstant(point3D.XYZ().data());
@@ -372,8 +372,8 @@ void BundleOptimizer<Derived>::ParameterizeImages(
       colmap::Image& image = reconstruction->Image(image_id);
       colmap::Camera& camera = reconstruction->Camera(image.CameraId());
 
-      double* qvec_data = image.Qvec().data();
-      double* tvec_data = image.Tvec().data();
+      double* qvec_data = image.cam_from_world.rotation.data();
+      double* tvec_data = image.cam_from_world.translation.data();
 
       const bool constant_pose = !options_.refine_extrinsics ||
                                  setup_.HasConstantCamPose(image_id) ||
@@ -410,7 +410,7 @@ void BundleOptimizer<Derived>::ParameterizeCameras(
     }
     colmap::Camera& camera = reconstruction->Camera(camera_id);
 
-    if (constant_camera || setup_.IsConstantCamera(camera_id)) {
+    if (constant_camera || setup_.HasConstantCamPose(camera_id)) {
       problem_->SetParameterBlockConstant(camera.ParamsData());
       continue;
     } else {

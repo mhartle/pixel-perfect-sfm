@@ -91,11 +91,11 @@ int CostMapBundleOptimizer::AddResiduals(const colmap::image_t image_id,
     return 0;
   }
 
-  colmap::point3D_t point3D_id = point2D.Point3DId();
+  colmap::point3D_t point3D_id = point2D.point3D_id;
   colmap::Point3D& point3D = reconstruction->Point3D(point3D_id);
 
-  double* qvec_data = image.Qvec().data();
-  double* tvec_data = image.Tvec().data();
+  double* qvec_data = image.cam_from_world.rotation.data();
+  double* tvec_data = image.cam_from_world.translation.data();
   double* camera_params_data = camera.ParamsData();
   double* xyz = point3D.XYZ().data();
 

@@ -70,7 +70,7 @@ inline void WorldToPixel(const T* camera_params, const T* qvec, const T* tvec,
   projection[0] /= projection[2];  // u
   projection[1] /= projection[2];  // v
 
-  CameraModel::ImgFromCam(camera_params, projection[0], projection[1], &xy[0],
+  CameraModel::ImgFromCam(camera_params, projection[0], projection[1], projection[2], &xy[0],
                             &xy[1]);
 }
 

@@ -27,13 +27,13 @@ ceres::CostFunction* CreateGeometricCostFunctor(
 }
 
 ceres::CostFunction* CreateGeometricConstantPoseCostFunctor(
-    colmap::CameraModelId camera_model_id, const Eigen::Vector4d& qvec,
-    const Eigen::Vector3d& tvec, const Eigen::Vector2d& point2D) {
+    colmap::CameraModelId camera_model_id, const colmap::Rigid3d& cam_from_world,
+    const Eigen::Vector2d& point2D) {
   switch (camera_model_id) {
 #define CAMERA_MODEL_CASE(CameraModel)                       \
   case colmap::CameraModel::model_id:                        \
     return colmap::ReprojErrorConstantPoseCostFunction< \
-        colmap::CameraModel>::Create(colmap::Rigid3d(Eigen::Quaterniond(qvec[0], qvec[1], qvec[2], qvec[3]), tvec), point2D);   \
+        colmap::CameraModel>::Create(cam_from_world, point2D);   \
     break;
     CAMERA_MODEL_SWITCH_CASES
 #undef CAMERA_MODEL_CASE

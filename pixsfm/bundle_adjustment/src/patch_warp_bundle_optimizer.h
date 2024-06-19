@@ -115,7 +115,7 @@ int PatchWarpBundleOptimizer::AddResiduals(
 
   double* qvec_data = image.CamFromWorld().rotation.coeffs().data();
   double* tvec_data = image.CamFromWorld().translation.data();
-  double* camera_params_data = camera.param.data();
+  double* camera_params_data = camera.params.data();
   double* xyz = point3D.xyz.data();
 
   ceres::ResidualBlockId block_id;

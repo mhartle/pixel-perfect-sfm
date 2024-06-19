@@ -211,11 +211,8 @@ double CostMapExtractor::RunSubset(
         // If the featuremap is dense, we slice a smaller patch
         const colmap::Image& image = reconstruction.Image(image_id);
         const colmap::Point2D& p2D = image.Point2D(point2D_idx);
-        Eigen::Vector2d xy = ProjectPointToImage(
-            reconstruction.Point3D(p2D.point3D_id).XYZ(),
-            image.ProjectionMatrix(),
-            reconstruction.Camera(image.CameraId())
-          );
+        Eigen::Vector2d xy = reconstruction.Camera(image.CameraId()).ImgFromCam(
+		(image.CamFromWorld() * reconstruction.Point3D(p2D.point3D_id).xyz).hnormalized());
         // Involves a copy
         FeaturePatch<dtype> fpatch = fmap.GetFeaturePatch(kDensePatchId).Slice(
           xy, config_.dense_cut_size);

@@ -81,7 +81,7 @@ inline void WorldToPixel(const colmap::Camera& camera,
 #define CAMERA_MODEL_CASE(CameraModel)                                  \
   case colmap::CameraModel::model_id:                                   \
     WorldToPixel<colmap::CameraModel>(camera.params.data(),             \
-    cam_from_world.rotation.coeffs.data(),                              \
+    cam_from_world.rotation.coeffs().data(),                            \
     cam_from_world.translation.data(), xyz.data(), xy);                 \
     break;
     CAMERA_MODEL_SWITCH_CASES

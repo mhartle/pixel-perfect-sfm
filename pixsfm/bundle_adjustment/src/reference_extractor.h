@@ -340,7 +340,7 @@ OffsetMatrix3d<N_NODES> NodeOffsets3D(
   Eigen::Vector2d projected = camera.ImgFromCam((image.CamFromWorld() * xyz).hnormalized());
 
   double depth;
-  CalculateDepth(image.CamFromWorld().rotation.coeffs()data(), image.CamFromWorld().translation.data(), xyz.data(), &depth);
+  CalculateDepth(image.CamFromWorld().rotation.coeffs().data(), image.CamFromWorld().translation.data(), xyz.data(), &depth);
 
   for (int i = 0; i < interpolation_config.nodes.size(); i++) {
     Eigen::Vector2d projected_node = projected;

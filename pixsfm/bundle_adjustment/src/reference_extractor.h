@@ -347,7 +347,7 @@ OffsetMatrix3d<N_NODES> NodeOffsets3D(
     projected_node(0) += interpolation_config.nodes[i][0];
     projected_node(1) += interpolation_config.nodes[i][1];
 
-    Eigen::Vector2d xy = camera.CamFromImage(projected_node);
+    Eigen::Vector2d xy = camera.CamFromImg(projected_node);
     Eigen::Vector3d xyz_node{xy(0), xy(1), 1.0};
 
     xyz_node = xyz_node * depth;

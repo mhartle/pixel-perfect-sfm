@@ -4,6 +4,7 @@
 #include <string>
 
 #include <colmap/util/misc.h>
+#include <colmap/sensor/models.h>
 
 #include <pybind11/pybind11.h>
 

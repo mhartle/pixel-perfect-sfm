@@ -42,7 +42,7 @@ template <typename CameraModel, typename T>
 void PixelToWorld(const T* camera_params, const T* qvec, const T* tvec,
                   const T x, const T y, const T* depth, T* xyz) {
   T local_xyz[3];
-  UndistortionAutodiffModel<CameraModel>::CamFromImage(
+  UndistortionAutodiffModel<CameraModel>::CamFromImg(
       camera_params, x, y, &local_xyz[0], &local_xyz[1]);
 
   local_xyz[2] = T(1.0);

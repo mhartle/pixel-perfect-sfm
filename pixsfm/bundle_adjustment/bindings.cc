@@ -88,9 +88,9 @@ void bind_bundle_adjustment(py::module& m) {
                self.AddImage(image_id);
              }
            })
-      .def("set_constant_camera", &BundleAdjustmentSetup::SetConstantCamera)
-      .def("set_variable_camera", &BundleAdjustmentSetup::SetVariableCamera)
-      .def("is_constant_camera", &BundleAdjustmentSetup::IsConstantCamera)
+      .def("set_constant_camera", &BundleAdjustmentSetup::SetConstantCamIntrinsics)
+      .def("set_variable_camera", &BundleAdjustmentSetup::SetVariableCamIntrinsics)
+      .def("is_constant_camera", &BundleAdjustmentSetup::HasConstantCamIntrinsics)
       .def("set_constant_cam_pose", &BundleAdjustmentSetup::SetConstantCamPose)
       .def("set_variable_cam_pose", &BundleAdjustmentSetup::SetVariableCamPose)
       .def("has_constant_cam_pose", &BundleAdjustmentSetup::HasConstantCamPose)

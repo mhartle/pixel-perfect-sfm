@@ -69,6 +69,8 @@ inline void __ThrowCheckImplMsg(const char* file, const int line,
   }
 }
 
+std::ostream& operator<<(std::ostream& os, const colmap::CameraModelId& id);
+
 template <typename T1, typename T2>
 void __ThrowCheckOpImpl(const char* file, const int line, const bool result,
                         const T1& val1, const T2& val2, const char* val1_str,
